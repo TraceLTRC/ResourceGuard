@@ -39,6 +39,7 @@ public class CommandHandler implements CommandExecutor {
                 }
                 case "RELOAD" -> {
                     plugin.reloadConfig();
+                    plugin.getResourceRegionManager().loadRegionsFromFile();
                     plugin.getLogger().info("Config reloaded from disk!");
                     return true;
                 }
