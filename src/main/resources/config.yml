@@ -1,0 +1,19 @@
+worlds:
+  resource:
+    id: "resource_spawn"
+    coordinates:
+      x: 100
+      z: 100
+    override-flags: []
+  resource_nether:
+    id: "resource_nether_spawn"
+    coordinates:
+      x: 100
+      z: 100
+    override-flags: []
+  resource_the_end:
+    id: "resource_end_spawn"
+    coordinates:
+      x: 35
+      z: 35
+    override-flags: []
