@@ -75,6 +75,7 @@ public class ResourceRegionManager {
             var protectedRegion = regionManager.getRegion(region.getValue().id());
 
             if (!region.getValue().isSimilar(protectedRegion)) {
+                plugin.getLogger().warning("Region " + region.getValue().id() + " is not similar to config! Recreating...");
                 regionManager.removeRegion(region.getValue().id());
                 regionManager.addRegion(region.getValue().createRegion());
             } else {

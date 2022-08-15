@@ -6,6 +6,9 @@ import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Location;
 
 import java.util.Map;
@@ -18,7 +21,11 @@ public record ResourceRegion(String id, BlockVector3 pos1, BlockVector3 pos2, Ma
             Flags.INVINCIBILITY, StateFlag.State.ALLOW,
             Flags.CREEPER_EXPLOSION, StateFlag.State.DENY,
             Flags.OTHER_EXPLOSION, StateFlag.State.DENY,
-            Flags.MOB_SPAWNING, StateFlag.State.DENY
+            Flags.MOB_SPAWNING, StateFlag.State.DENY,
+            Flags.GREET_MESSAGE, LegacyComponentSerializer
+                    .legacyAmpersand().serialize(Component.text("You entered resource spawn!", NamedTextColor.GREEN)),
+            Flags.FAREWELL_MESSAGE, LegacyComponentSerializer
+                    .legacyAmpersand().serialize(Component.text("You left resource spawn!", NamedTextColor.YELLOW))
     );
 
     public ResourceRegion(String id, BlockVector3 loc1, BlockVector3 loc2) {
