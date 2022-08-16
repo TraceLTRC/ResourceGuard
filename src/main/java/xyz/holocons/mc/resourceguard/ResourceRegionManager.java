@@ -3,6 +3,7 @@ package xyz.holocons.mc.resourceguard;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.protection.flags.Flag;
 import org.bukkit.Bukkit;
 
 import java.util.HashMap;
@@ -46,8 +47,16 @@ public class ResourceRegionManager {
             var pt1 = BlockVector3.at(spawn.getBlockX() - xRad, -64, spawn.getBlockZ() - zRad);
             var pt2 = BlockVector3.at(spawn.getBlockX() + xRad, 320, spawn.getBlockZ() + zRad);
 
-            // TODO find out how to get flag values from config
-            guardedRegions.put(bukkitWorld.getUID(), new ResourceRegion(id, pt1, pt2));
+            var flagSection = config.getConfigurationSection("worlds." + world + ".override-flags");
+            Map<Flag<?>, Object> flags;
+            if (flagSection != null) {
+                flags = WorldGuard.getInstance().getFlagRegistry()
+                        .unmarshal(flagSection.getValues(false), false);
+            } else {
+                flags = null;
+            }
+
+            guardedRegions.put(bukkitWorld.getUID(), new ResourceRegion(id, pt1, pt2, flags));
         }
         plugin.getLogger().info("Succesfully loaded " + guardedRegions.size() + " regions from disk!");
     }
