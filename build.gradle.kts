@@ -52,7 +52,7 @@ bukkit {
 
     commands {
         register("res-guard") {
-            usage = "/res-guard <info/reset>"
+            usage = "/res-guard <reset/validate/reload>"
         }
     }
 }
